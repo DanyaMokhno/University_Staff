@@ -1,0 +1,16 @@
+#include <stdio.h>
+
+int main() {
+    int numbers[] = {1, 2, 3, 4, 5}; /* declaring an array */
+    int i; /* declaring an iterator */
+
+/*
+ * using a loop to iterate over the array
+ * and printing each element.
+ */
+    for (i = 0; i < 5; ++i) {
+        printf("Element %d: %d\n", i, numbers[i]);
+    }
+
+    return 0;
+}

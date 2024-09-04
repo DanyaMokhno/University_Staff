@@ -1,0 +1,8 @@
+# ninja log v5
+22	55	1694447400887581800	Laboratory_Work	cbbaef1a5c29fc35
+0	21	1694447400853295570	CMakeFiles/Laboratory_Work.dir/main.c.o	c2508bd5d5dde8a6
+0	52	1694785967783855469	build.ninja	25a2ccec131d3b9f
+0	210	1694785967998394202	CMakeFiles/Laboratory_Work.dir/main.c.o	c2508bd5d5dde8a6
+210	295	1694785968085050811	Laboratory_Work	cbbaef1a5c29fc35
+0	33	1695037314043101722	CMakeFiles/Laboratory_Work.dir/main.c.o	c2508bd5d5dde8a6
+33	70	1695037314080312229	Laboratory_Work	cbbaef1a5c29fc35

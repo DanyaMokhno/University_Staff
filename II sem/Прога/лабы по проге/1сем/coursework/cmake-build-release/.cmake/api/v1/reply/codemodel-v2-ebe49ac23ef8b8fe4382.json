@@ -1,0 +1,60 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"jsonFile" : "directory-.-Release-f5ebdc15457944623624.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.26"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0
+					]
+				}
+			],
+			"name" : "Release",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "coursework",
+					"targetIndexes" : 
+					[
+						0
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "coursework::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-coursework-Release-c4f8bc700748c0a8872c.json",
+					"name" : "coursework",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/Users/daniilmohno/Library/Mobile Documents/com~apple~CloudDocs/Student-staff/\u043b\u0430\u0431\u044b \u043f\u043e \u043f\u0440\u043e\u0433\u0435/coursework/cmake-build-release",
+		"source" : "/Users/daniilmohno/Library/Mobile Documents/com~apple~CloudDocs/Student-staff/\u043b\u0430\u0431\u044b \u043f\u043e \u043f\u0440\u043e\u0433\u0435/coursework"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 6
+	}
+}

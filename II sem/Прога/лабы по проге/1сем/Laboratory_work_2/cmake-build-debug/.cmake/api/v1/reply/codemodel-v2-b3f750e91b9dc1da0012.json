@@ -1,0 +1,60 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"jsonFile" : "directory-.-Debug-f5ebdc15457944623624.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.26"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "Laboratory_work_2",
+					"targetIndexes" : 
+					[
+						0
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "Laboratory_work_2::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-Laboratory_work_2-Debug-86df8dc7440b5dd5b698.json",
+					"name" : "Laboratory_work_2",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/Users/daniilmohno/Library/Mobile Documents/com~apple~CloudDocs/Student-staff/\u043b\u0430\u0431\u044b/Laboratory_work_2/cmake-build-debug",
+		"source" : "/Users/daniilmohno/Library/Mobile Documents/com~apple~CloudDocs/Student-staff/\u043b\u0430\u0431\u044b/Laboratory_work_2"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 5
+	}
+}

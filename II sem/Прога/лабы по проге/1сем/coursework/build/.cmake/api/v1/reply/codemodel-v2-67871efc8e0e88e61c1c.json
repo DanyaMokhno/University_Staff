@@ -1,0 +1,60 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"jsonFile" : "directory-.-Debug-f5ebdc15457944623624.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.26"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "coursework",
+					"targetIndexes" : 
+					[
+						0
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "out::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-out-Debug-52090edd728f7894ea0e.json",
+					"name" : "out",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/Users/daniilmohno/Library/Mobile Documents/com~apple~CloudDocs/Student-staff/\u043b\u0430\u0431\u044b \u043f\u043e \u043f\u0440\u043e\u0433\u0435/coursework/build",
+		"source" : "/Users/daniilmohno/Library/Mobile Documents/com~apple~CloudDocs/Student-staff/\u043b\u0430\u0431\u044b \u043f\u043e \u043f\u0440\u043e\u0433\u0435/coursework"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 6
+	}
+}

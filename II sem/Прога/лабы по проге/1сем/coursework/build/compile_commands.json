@@ -1,0 +1,8 @@
+[
+{
+  "directory": "/Users/daniilmohno/Library/Mobile Documents/com~apple~CloudDocs/Student-staff/лабы по проге/coursework/build",
+  "command": "/usr/bin/clang   -g -std=gnu99 -arch arm64 -o CMakeFiles/out.dir/main.c.o -c \"/Users/daniilmohno/Library/Mobile Documents/com~apple~CloudDocs/Student-staff/лабы по проге/coursework/main.c\"",
+  "file": "/Users/daniilmohno/Library/Mobile Documents/com~apple~CloudDocs/Student-staff/лабы по проге/coursework/main.c",
+  "output": "CMakeFiles/out.dir/main.c.o"
+}
+]

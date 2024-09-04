@@ -1,0 +1,8 @@
+[
+{
+  "directory": "/Users/daniilmohno/Library/Mobile Documents/com~apple~CloudDocs/Student-staff/лабы по проге/Laboratory_Work_5/build",
+  "command": "/usr/bin/clang   -g -std=gnu99 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk -o CMakeFiles/out.dir/main.c.o -c \"/Users/daniilmohno/Library/Mobile Documents/com~apple~CloudDocs/Student-staff/лабы по проге/Laboratory_Work_5/main.c\"",
+  "file": "/Users/daniilmohno/Library/Mobile Documents/com~apple~CloudDocs/Student-staff/лабы по проге/Laboratory_Work_5/main.c",
+  "output": "CMakeFiles/out.dir/main.c.o"
+}
+]

@@ -1,0 +1,4 @@
+/Applications/CLion.app/Contents/bin/cmake/mac/aarch64/bin/cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_MAKE_PROGRAM=/Applications/CLion.app/Contents/bin/ninja/mac/aarch64/ninja -G Ninja -S "/Users/daniilmohno/Library/Mobile Documents/com~apple~CloudDocs/Student-staff/лабы по проге/coursework" -B "/Users/daniilmohno/Library/Mobile Documents/com~apple~CloudDocs/Student-staff/лабы по проге/coursework/cmake-build-release"
+-- Configuring done (0.0s)
+-- Generating done (0.0s)
+-- Build files have been written to: /Users/daniilmohno/Library/Mobile Documents/com~apple~CloudDocs/Student-staff/лабы по проге/coursework/cmake-build-release

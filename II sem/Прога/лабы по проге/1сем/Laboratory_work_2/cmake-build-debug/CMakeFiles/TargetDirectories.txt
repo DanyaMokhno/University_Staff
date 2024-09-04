@@ -1,0 +1,3 @@
+/Users/daniilmohno/Library/Mobile Documents/com~apple~CloudDocs/Student-staff/лабы/Laboratory_work_2/cmake-build-debug/CMakeFiles/Laboratory_work_2.dir
+/Users/daniilmohno/Library/Mobile Documents/com~apple~CloudDocs/Student-staff/лабы/Laboratory_work_2/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/daniilmohno/Library/Mobile Documents/com~apple~CloudDocs/Student-staff/лабы/Laboratory_work_2/cmake-build-debug/CMakeFiles/rebuild_cache.dir
