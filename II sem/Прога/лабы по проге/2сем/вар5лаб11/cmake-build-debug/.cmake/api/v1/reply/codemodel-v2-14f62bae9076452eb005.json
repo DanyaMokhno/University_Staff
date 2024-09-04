@@ -1,0 +1,60 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"jsonFile" : "directory-.-Debug-f5ebdc15457944623624.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.28"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "511",
+					"targetIndexes" : 
+					[
+						0
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "511::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-511-Debug-9f5789c2908d63478791.json",
+					"name" : "511",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/Users/daniilmohno/Library/Mobile Documents/com~apple~CloudDocs/Student-staff/\u041f\u0440\u043e\u0433\u0430/\u043b\u0430\u0431\u044b \u043f\u043e \u043f\u0440\u043e\u0433\u0435/2\u0441\u0435\u043c/\u0432\u0430\u04405\u043b\u0430\u043111/cmake-build-debug",
+		"source" : "/Users/daniilmohno/Library/Mobile Documents/com~apple~CloudDocs/Student-staff/\u041f\u0440\u043e\u0433\u0430/\u043b\u0430\u0431\u044b \u043f\u043e \u043f\u0440\u043e\u0433\u0435/2\u0441\u0435\u043c/\u0432\u0430\u04405\u043b\u0430\u043111"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 6
+	}
+}

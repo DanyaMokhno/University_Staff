@@ -1,0 +1,167 @@
+{
+	"inputs" : 
+	[
+		{
+			"path" : "CMakeLists.txt"
+		},
+		{
+			"isGenerated" : true,
+			"path" : "cmake-build-debug/CMakeFiles/3.27.8/CMakeSystem.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/Applications/CLion.app/Contents/bin/cmake/mac/aarch64/share/cmake-3.27/Modules/CMakeSystemSpecificInitialize.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/Applications/CLion.app/Contents/bin/cmake/mac/aarch64/share/cmake-3.27/Modules/Platform/Darwin-Initialize.cmake"
+		},
+		{
+			"isGenerated" : true,
+			"path" : "cmake-build-debug/CMakeFiles/3.27.8/CMakeCCompiler.cmake"
+		},
+		{
+			"isGenerated" : true,
+			"path" : "cmake-build-debug/CMakeFiles/3.27.8/CMakeCXXCompiler.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/Applications/CLion.app/Contents/bin/cmake/mac/aarch64/share/cmake-3.27/Modules/CMakeSystemSpecificInformation.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/Applications/CLion.app/Contents/bin/cmake/mac/aarch64/share/cmake-3.27/Modules/CMakeGenericSystem.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/Applications/CLion.app/Contents/bin/cmake/mac/aarch64/share/cmake-3.27/Modules/CMakeInitializeConfigs.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/Applications/CLion.app/Contents/bin/cmake/mac/aarch64/share/cmake-3.27/Modules/Platform/Darwin.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/Applications/CLion.app/Contents/bin/cmake/mac/aarch64/share/cmake-3.27/Modules/Platform/UnixPaths.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/Applications/CLion.app/Contents/bin/cmake/mac/aarch64/share/cmake-3.27/Modules/CMakeCInformation.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/Applications/CLion.app/Contents/bin/cmake/mac/aarch64/share/cmake-3.27/Modules/CMakeLanguageInformation.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/Applications/CLion.app/Contents/bin/cmake/mac/aarch64/share/cmake-3.27/Modules/Compiler/AppleClang-C.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/Applications/CLion.app/Contents/bin/cmake/mac/aarch64/share/cmake-3.27/Modules/Compiler/Clang.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/Applications/CLion.app/Contents/bin/cmake/mac/aarch64/share/cmake-3.27/Modules/Compiler/CMakeCommonCompilerMacros.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/Applications/CLion.app/Contents/bin/cmake/mac/aarch64/share/cmake-3.27/Modules/Compiler/GNU.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/Applications/CLion.app/Contents/bin/cmake/mac/aarch64/share/cmake-3.27/Modules/Compiler/CMakeCommonCompilerMacros.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/Applications/CLion.app/Contents/bin/cmake/mac/aarch64/share/cmake-3.27/Modules/Platform/Apple-AppleClang-C.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/Applications/CLion.app/Contents/bin/cmake/mac/aarch64/share/cmake-3.27/Modules/Platform/Apple-Clang-C.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/Applications/CLion.app/Contents/bin/cmake/mac/aarch64/share/cmake-3.27/Modules/Platform/Apple-Clang.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/Applications/CLion.app/Contents/bin/cmake/mac/aarch64/share/cmake-3.27/Modules/CMakeCommonLanguageInclude.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/Applications/CLion.app/Contents/bin/cmake/mac/aarch64/share/cmake-3.27/Modules/CMakeCXXInformation.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/Applications/CLion.app/Contents/bin/cmake/mac/aarch64/share/cmake-3.27/Modules/CMakeLanguageInformation.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/Applications/CLion.app/Contents/bin/cmake/mac/aarch64/share/cmake-3.27/Modules/Compiler/AppleClang-CXX.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/Applications/CLion.app/Contents/bin/cmake/mac/aarch64/share/cmake-3.27/Modules/Compiler/Clang.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/Applications/CLion.app/Contents/bin/cmake/mac/aarch64/share/cmake-3.27/Modules/Platform/Apple-AppleClang-CXX.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/Applications/CLion.app/Contents/bin/cmake/mac/aarch64/share/cmake-3.27/Modules/Platform/Apple-Clang-CXX.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/Applications/CLion.app/Contents/bin/cmake/mac/aarch64/share/cmake-3.27/Modules/Platform/Apple-Clang.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/Applications/CLion.app/Contents/bin/cmake/mac/aarch64/share/cmake-3.27/Modules/CMakeCommonLanguageInclude.cmake"
+		},
+		{
+			"path" : "random_word.txt"
+		},
+		{
+			"path" : "test.txt"
+		}
+	],
+	"kind" : "cmakeFiles",
+	"paths" : 
+	{
+		"build" : "/Users/daniilmohno/Library/Mobile Documents/com~apple~CloudDocs/Student-staff/\u041f\u0440\u043e\u0433\u0430/\u043b\u0430\u0431\u044b \u043f\u043e \u043f\u0440\u043e\u0433\u0435/2\u0441\u0435\u043c/binary_tree/cmake-build-debug",
+		"source" : "/Users/daniilmohno/Library/Mobile Documents/com~apple~CloudDocs/Student-staff/\u041f\u0440\u043e\u0433\u0430/\u043b\u0430\u0431\u044b \u043f\u043e \u043f\u0440\u043e\u0433\u0435/2\u0441\u0435\u043c/binary_tree"
+	},
+	"version" : 
+	{
+		"major" : 1,
+		"minor" : 0
+	}
+}

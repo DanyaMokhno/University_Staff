@@ -1,0 +1,3 @@
+/Users/daniilmohno/Library/Mobile Documents/com~apple~CloudDocs/Student-staff/Прога/лабы по проге/2сем/Лаб11Вар4/cmake-build-debug/CMakeFiles/out.dir
+/Users/daniilmohno/Library/Mobile Documents/com~apple~CloudDocs/Student-staff/Прога/лабы по проге/2сем/Лаб11Вар4/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/daniilmohno/Library/Mobile Documents/com~apple~CloudDocs/Student-staff/Прога/лабы по проге/2сем/Лаб11Вар4/cmake-build-debug/CMakeFiles/rebuild_cache.dir
