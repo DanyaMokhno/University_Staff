@@ -1,16 +1,17 @@
 #include <iostream>
 #include <cwchar>    // Для работы с широкими строками и функциями wcscpy, wcslen
-#include <time.h>
+#include <ctime>
+#include <chrono>
 
 using namespace std;
 
-const int UNIVERSE_SIZE = 31; // Количество букв в русском алфавите (буква ё находится на а+33 месте, на а+32 почему-то находится ѐ
+const int UNIVERSE_SIZE = 31; // Количество букв в русском алфавите (буква ё находится на, а+33 месте, на, а+32 почему-то находится ѐ
 
 #pragma region list
 
 struct Word {
-    wchar_t letter;
-    Word *next;
+    wchar_t letter = L'\0';
+    Word *next = nullptr;
 };
 
 // Функция для проверки, содержится ли символ в списке
@@ -58,17 +59,26 @@ void OR(const Word* src, Word*& dst) {
 }
 
 // Function to perform difference (DIFF) operation on linked lists
-void DIFF(Word* A, const Word* B) {
-    Word* prev = A;
-    while (A) {
+void DIFF(Word** A, const Word* B) {
+    Word* prev = nullptr, *cur = *A;
+    while (cur) {
+//        cout << A << endl;
         // If A->letter is  in B, delete it from dst
-        if (contains(B, A->letter)) {
-            prev->next = A->next;
-            delete A;
-            A = prev->next;
+        if (contains(B, cur->letter)) {
+            if (prev != nullptr)
+            {
+                prev->next = cur->next;
+                delete cur;
+                cur = prev->next;
+            } else{
+                prev = cur;
+                *A = (*A)->next;
+                cur = cur->next;
+                delete prev;
+            }
         }else{
-            prev = A;
-            A = A->next;
+            prev = cur;
+            cur = cur->next;
         }
     }
 }
@@ -213,7 +223,7 @@ void Randomizer(wchar_t *arr){
 //        } else {
 //            arr[i] = first_lower + i;  // Строчные буквы
 //        }
-        arr[i] = first_lower + random()%UNIVERSE_SIZE+1;  // Строчные буквы
+        arr[i] = (wchar_t)(first_lower + random()%UNIVERSE_SIZE+1);  // Строчные буквы
     }
     arr[i] = L'\0'; // Завершаем массив нулевым символом
 
@@ -224,11 +234,9 @@ int main() {
 
     wcout.imbue(locale("ru_RU.UTF-8"));  // Устанавливаем локаль для wcout
     const size_t len = 100;
-//    srand(static_cast<unsigned int>(time(0)));
-
     wchar_t a[len], b[len], c[len], d[len];
     // Инициализируем генератор случайных чисел
-    srand(3458); // time(nullptr)
+    srand(time(nullptr)); // time(nullptr)
     Randomizer(a);
     Randomizer(b);
     Randomizer(c);
@@ -245,6 +253,7 @@ int main() {
 
 #pragma region list work
 
+    auto list_t1 = chrono::high_resolution_clock::now( );
     // Преобразуем строки в линейные списки
     Word* list_a = string_to_list(a);
     Word* list_b = string_to_list(b);
@@ -259,18 +268,25 @@ int main() {
 
 
     // Perform difference between the union result (listD) and listC
-    DIFF(list_e, list_c);
+    DIFF(&list_e, list_c);
 
+    auto list_t2 = chrono::high_resolution_clock::now( );
+    auto list_time_res = chrono::duration_cast<chrono::duration<double, micro>>(list_t2 - list_t1).count();
     // Запись результата
     convert(list_e, e_list);
 #pragma endregion list work
 
 #pragma region arr work
     e_arr[0] = '\0';
+    auto arr_t1 = chrono::high_resolution_clock::now( );
+
     OR(a,e_arr);
     OR(b, e_arr);
     OR(d, e_arr);
     DIFF(e_arr, c, e_arr);
+
+    auto arr_t2 = chrono::high_resolution_clock::now( );
+    auto arr_time_res = chrono::duration_cast<chrono::duration<double, micro>>(arr_t2 - arr_t1).count();
 #pragma endregion arr work
 
 #pragma region universe work
@@ -283,12 +299,18 @@ int main() {
     mapToUniverse(c, bitC);
     mapToUniverse(d, bitD);
 
+    auto uni_t1 = chrono::high_resolution_clock::now( );
+
     // (a ∪ b ∪ d)
     unionSets(bitA, bitB, bitUnion);
     unionSets(bitUnion, bitD, bitUnion);
 
     // (a ∪ b ∪ d) \ c
     differenceSets(bitUnion, bitC, bitResult);
+
+    auto uni_t2 = chrono::high_resolution_clock::now( );
+    auto uni_time_res = chrono::duration_cast<chrono::duration<double, micro>>(uni_t2 - uni_t1).count();
+
 
     // Вывод результата
     convert(bitResult, e_uni);
@@ -301,9 +323,16 @@ int main() {
     unsigned long long wC = mapToWord(c);
     unsigned long long wD = mapToWord(d);
 
+    auto mw_t1 = chrono::high_resolution_clock::now( );
+
+
     // Вычисляем E = (A ∪ B ∪ D) \ C
     unsigned long long wUnion = (wA | wB | wD); // (A ∪ B ∪ D)
     unsigned long long wResult = wUnion & ~wC;  // (A ∪ B ∪ D) \ C
+
+    auto mw_t2 = chrono::high_resolution_clock::now( );
+    auto mw_time_res = chrono::duration_cast<chrono::duration<double, micro>>(mw_t2 - mw_t1).count();
+
 
     // Вывод результата
     convert(wResult, e_mw);
@@ -311,12 +340,11 @@ int main() {
 
 #pragma region output results
     // Вывод результата
-    wcout << "array\t\t\t"  << e_arr << endl;
-    wcout << "linked list\t\t" << e_list << endl;
-    wcout << "universe\t\t" << e_uni << endl;
-    wcout << "machine word\t" << e_mw << endl;
+    wcout << "array\t\t\t"  << e_arr << L",\tза время:\t" << arr_time_res << L" микросекунд" << endl;
+    wcout << "linked list\t\t" << e_list << L",\tза время:\t" << list_time_res << L" микросекунд" << endl;
+    wcout << "universe\t\t" << e_uni << L",\tза время:\t" << uni_time_res << L" микросекунд" << endl;
+    wcout << "machine word\t" << e_mw << L",\tза время:\t" << mw_time_res << L" микросекунд" << endl;
 #pragma endregion output results
 
     return 0;
 }
-
