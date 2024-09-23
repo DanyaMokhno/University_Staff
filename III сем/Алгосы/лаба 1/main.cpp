@@ -1,11 +1,10 @@
 #include <iostream>
 #include <cwchar>    // Для работы с широкими строками и функциями wcscpy, wcslen
-#include <ctime>
 #include <chrono>
 
 using namespace std;
 
-const int UNIVERSE_SIZE = 31; // Количество букв в русском алфавите (буква ё находится на, а+33 месте, на, а+32 почему-то находится ѐ
+const short UNIVERSE_SIZE = 66; // 33 строчные + 33 заглавные буквы
 
 #pragma region list
 
@@ -47,10 +46,9 @@ Word* string_to_list(const wchar_t * str) {
     return head;
 }
 
-// Function to perform union (OR) operation on linked lists
 void OR(const Word* src, Word*& dst) {
     while (src) {
-        // If src->letter is not in dst, add it to dst
+        // Если src->letter не в dst, добавляем
         if (!contains(dst, src->letter)) {
             add_Word(dst, src->letter);
         }
@@ -58,27 +56,26 @@ void OR(const Word* src, Word*& dst) {
     }
 }
 
-// Function to perform difference (DIFF) operation on linked lists
 void DIFF(Word** A, const Word* B) {
     Word* prev = nullptr, *cur = *A;
+
     while (cur) {
-//        cout << A << endl;
-        // If A->letter is  in B, delete it from dst
+        // Если буква A находится в B, удаляем её из A
         if (contains(B, cur->letter)) {
-            if (prev != nullptr)
-            {
-                prev->next = cur->next;
-                delete cur;
-                cur = prev->next;
-            } else{
-                prev = cur;
-                *A = (*A)->next;
-                cur = cur->next;
-                delete prev;
+            if (prev) {
+                prev->next = cur->next; // Пропускаем текущий узел
+                delete cur;             // Удаляем текущий узел
+                cur = prev->next;       // Переходим к следующему узлу
+            } else {
+                // Обновляем голову, если удаляем первый узел
+                Word* temp = cur;        // Сохраняем текущий узел для удаления
+                *A = cur->next;          // Перемещаем голову на следующий узел
+                cur = *A;                // Обновляем текущий до головы
+                delete temp;             // Удаляем старую голову
             }
-        }else{
-            prev = cur;
-            cur = cur->next;
+        } else {
+            prev = cur;                  // Перемещаем prev на текущий узел
+            cur = cur->next;             // Переходим к следующему узлу
         }
     }
 }
@@ -101,7 +98,7 @@ void convert(const Word* list, wchar_t* arr) {
 void OR(const wchar_t *src, wchar_t *dst) {
     size_t len_dst = wcslen(dst);
     for (int i = 0; src[i] != '\0'; i++) {
-        // note: проверка на то, чтобы символ не уже не содержался в строке, и на то, чтобы не содержался в строке C
+        // Проверка на то, чтобы символ не содержался в строке
         if (dst && !wcschr(dst, src[i])) {
             dst[len_dst] = src[i];
             len_dst++;
@@ -135,10 +132,15 @@ void mapToUniverse(const wchar_t *str, bool *bitVector)
     // Устанавливаем бит для каждой буквы из строки
     for (int i = 0; str[i]; ++i)
     {
-        // Индекс буквы относительно 'а'
-        int index = str[i] - L'а';
-        if (index >= 0 && index < UNIVERSE_SIZE)
-        {
+        int index = -1;
+        // Индекс для строчной или заглавной буквы
+        if (str[i] >= L'а' && str[i] <= L'ё') {
+            index = str[i] - L'а';
+        } else if (str[i] >= L'А' && str[i] <= L'Я') {
+            index = 33 + (str[i] - L'А');
+        }
+
+        if (index >= 0 && index < UNIVERSE_SIZE) {
             bitVector[index] = true;
         }
     }
@@ -165,7 +167,10 @@ void convert(const bool *bitVector, wchar_t* res)
     for (int i = 0; i < UNIVERSE_SIZE; ++i)
     {
         if (bitVector[i]){
-            res[j] = (wchar_t) (L'а' + i);
+            if (i < 33)
+                res[j] = (wchar_t)(L'а' + i);   // Строчные буквы
+            else
+                res[j] = (wchar_t)(L'А' + i - 33); // Заглавные буквы
             j++;
         }
     }
@@ -178,8 +183,10 @@ void convert(const bool *bitVector, wchar_t* res)
 
 // Функция отображения символа в позицию бита
 int charToBitIndex(wchar_t ch) {
-    if (ch >= L'а' && ch <= L'я') {
-        return ch - L'а'; // Индекс для русских букв
+    if (ch >= L'а' && ch <= L'ё') {
+        return ch - L'а'; // Индекс для строчных букв
+    } else if (ch >= L'А' && ch <= L'Я') {
+        return 33 + (ch - L'А'); // Индекс для заглавных букв
     }
     return -1; // Неизвестный символ
 }
@@ -201,7 +208,10 @@ void convert(unsigned long long bitWord, wchar_t* res) {
     int j = 0;
     for (int i = 0; i < UNIVERSE_SIZE; ++i) {
         if (bitWord & (1ULL << i)) {
-            res[j] = (wchar_t)(L'а' + i);
+            if (i < 33)
+                res[j] = (wchar_t)(L'а' + i); // Строчные буквы
+            else
+                res[j] = (wchar_t)(L'А' + i - 33); // Заглавные буквы
             j++;
         }
     }
@@ -211,23 +221,22 @@ void convert(unsigned long long bitWord, wchar_t* res) {
 #pragma endregion machine word
 
 void Randomizer(wchar_t *arr){
-//    const wchar_t first_upper = L'А'; // Начало заглавных букв
     const wchar_t first_lower = L'а'; // Начало строчных букв
-
-
+    const wchar_t first_upper = L'А'; // Начало заглавных букв
     int i;
-    for (i = 0; i < rand()%UNIVERSE_SIZE+1; i++) {
-//        // Случайный выбор между заглавными и строчными буквами
-//        if (rand() % 2) {
-//            arr[i] = first_upper + i;  // Заглавные буквы
-//        } else {
-//            arr[i] = first_lower + i;  // Строчные буквы
-//        }
-        arr[i] = (wchar_t)(first_lower + random()%UNIVERSE_SIZE+1);  // Строчные буквы
-    }
-    arr[i] = L'\0'; // Завершаем массив нулевым символом
+    for (i = 0; i < rand()%((UNIVERSE_SIZE/2)-1)+1; i++) {
+        // Случайный выбор между заглавными и строчными буквами
+        if (rand() % 2) {
+            arr[i] = (wchar_t)(first_upper + rand()%((UNIVERSE_SIZE/2)-1)+1);  // Строчные буквы
+        } else {
+            arr[i] = (wchar_t)(first_lower + rand()%((UNIVERSE_SIZE/2)-1)+1);  // Строчные буквы
+        }
 
+        if (arr[i]-first_lower == 32) i--;
+    }
+    arr[i] = '\0';
 }
+
 
 int main() {
 #pragma region formation
@@ -236,7 +245,7 @@ int main() {
     const size_t len = 100;
     wchar_t a[len], b[len], c[len], d[len];
     // Инициализируем генератор случайных чисел
-    srand(time(nullptr)); // time(nullptr)
+    srand(time(nullptr));
     Randomizer(a);
     Randomizer(b);
     Randomizer(c);
@@ -253,25 +262,25 @@ int main() {
 
 #pragma region list work
 
-    auto list_t1 = chrono::high_resolution_clock::now( );
     // Преобразуем строки в линейные списки
     Word* list_a = string_to_list(a);
     Word* list_b = string_to_list(b);
     Word* list_c = string_to_list(c);
     Word* list_d = string_to_list(d);
     Word* list_e = nullptr;
+    auto list_t1 = chrono::high_resolution_clock::now( );
 
-    // Perform union of listA, listB, and listD
+    // Вычисляем E = (A ∪ B ∪ D) \ C
     OR(list_a, list_e);
     OR(list_b, list_e);
     OR(list_d, list_e);
 
 
-    // Perform difference between the union result (listD) and listC
     DIFF(&list_e, list_c);
 
     auto list_t2 = chrono::high_resolution_clock::now( );
     auto list_time_res = chrono::duration_cast<chrono::duration<double, micro>>(list_t2 - list_t1).count();
+
     // Запись результата
     convert(list_e, e_list);
 #pragma endregion list work
@@ -280,6 +289,7 @@ int main() {
     e_arr[0] = '\0';
     auto arr_t1 = chrono::high_resolution_clock::now( );
 
+    // Вычисляем E = (A ∪ B ∪ D) \ C
     OR(a,e_arr);
     OR(b, e_arr);
     OR(d, e_arr);
@@ -312,7 +322,7 @@ int main() {
     auto uni_time_res = chrono::duration_cast<chrono::duration<double, micro>>(uni_t2 - uni_t1).count();
 
 
-    // Вывод результата
+    // Запись результата
     convert(bitResult, e_uni);
 #pragma endregion universe work
 
@@ -334,7 +344,7 @@ int main() {
     auto mw_time_res = chrono::duration_cast<chrono::duration<double, micro>>(mw_t2 - mw_t1).count();
 
 
-    // Вывод результата
+    // Запись результата
     convert(wResult, e_mw);
 #pragma endregion machine word work
 
