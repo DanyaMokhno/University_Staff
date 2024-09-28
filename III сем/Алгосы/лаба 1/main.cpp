@@ -4,7 +4,7 @@
 
 using namespace std;
 
-const short UNIVERSE_SIZE = 66; // 33 строчные + 33 заглавные буквы
+const short UNIVERSE_SIZE = 34; // Количество букв в русском алфавите (буква ё находится на, а+33 месте, на, а+32 почему-то находится ѐ
 
 #pragma region list
 
@@ -48,13 +48,14 @@ Word* string_to_list(const wchar_t * str) {
 
 void OR(const Word* src, Word*& dst) {
     while (src) {
-        // Если src->letter не в dst, добавляем
+        // If src->letter is not in dst, add it to dst
         if (!contains(dst, src->letter)) {
             add_Word(dst, src->letter);
         }
         src = src->next;
     }
 }
+
 
 void DIFF(Word** A, const Word* B) {
     Word* prev = nullptr, *cur = *A;
@@ -98,7 +99,7 @@ void convert(const Word* list, wchar_t* arr) {
 void OR(const wchar_t *src, wchar_t *dst) {
     size_t len_dst = wcslen(dst);
     for (int i = 0; src[i] != '\0'; i++) {
-        // Проверка на то, чтобы символ не содержался в строке
+        // note: проверка на то, чтобы символ не уже не содержался в строке, и на то, чтобы не содержался в строке C
         if (dst && !wcschr(dst, src[i])) {
             dst[len_dst] = src[i];
             len_dst++;
@@ -132,29 +133,24 @@ void mapToUniverse(const wchar_t *str, bool *bitVector)
     // Устанавливаем бит для каждой буквы из строки
     for (int i = 0; str[i]; ++i)
     {
-        int index = -1;
-        // Индекс для строчной или заглавной буквы
-        if (str[i] >= L'а' && str[i] <= L'ё') {
-            index = str[i] - L'а';
-        } else if (str[i] >= L'А' && str[i] <= L'Я') {
-            index = 33 + (str[i] - L'А');
-        }
-
-        if (index >= 0 && index < UNIVERSE_SIZE) {
+        // Индекс буквы относительно 'а'
+        int index = str[i] - L'а';
+        if (index >= 0 && index < UNIVERSE_SIZE)
+        {
             bitVector[index] = true;
         }
     }
 }
 
 // Функция для объединения множеств (логическое ИЛИ)
-void unionSets(const bool *A, const bool *B, bool *result)
+void OR(const bool *A, const bool *B, bool *result)
 {
     for (int i = 0; i < UNIVERSE_SIZE; ++i)
         result[i] = A[i] || B[i];
 }
 
 // Функция для разности множеств (A \ B)
-void differenceSets(const bool *A, const bool *B, bool *result)
+void DIFF(const bool *A, const bool *B, bool *result)
 {
     for (int i = 0; i < UNIVERSE_SIZE; ++i)
         result[i] = A[i] && !B[i];
@@ -167,10 +163,7 @@ void convert(const bool *bitVector, wchar_t* res)
     for (int i = 0; i < UNIVERSE_SIZE; ++i)
     {
         if (bitVector[i]){
-            if (i < 33)
-                res[j] = (wchar_t)(L'а' + i);   // Строчные буквы
-            else
-                res[j] = (wchar_t)(L'А' + i - 33); // Заглавные буквы
+            res[j] = (wchar_t) (L'а' + i);
             j++;
         }
     }
@@ -184,9 +177,7 @@ void convert(const bool *bitVector, wchar_t* res)
 // Функция отображения символа в позицию бита
 int charToBitIndex(wchar_t ch) {
     if (ch >= L'а' && ch <= L'ё') {
-        return ch - L'а'; // Индекс для строчных букв
-    } else if (ch >= L'А' && ch <= L'Я') {
-        return 33 + (ch - L'А'); // Индекс для заглавных букв
+        return ch - L'а'; // Индекс для русских букв
     }
     return -1; // Неизвестный символ
 }
@@ -208,10 +199,7 @@ void convert(unsigned long long bitWord, wchar_t* res) {
     int j = 0;
     for (int i = 0; i < UNIVERSE_SIZE; ++i) {
         if (bitWord & (1ULL << i)) {
-            if (i < 33)
-                res[j] = (wchar_t)(L'а' + i); // Строчные буквы
-            else
-                res[j] = (wchar_t)(L'А' + i - 33); // Заглавные буквы
+            res[j] = (wchar_t)(L'а' + i);
             j++;
         }
     }
@@ -220,43 +208,53 @@ void convert(unsigned long long bitWord, wchar_t* res) {
 
 #pragma endregion machine word
 
-void Randomizer(wchar_t *arr){
+void Randomizer(wchar_t *arr, size_t power) {
     const wchar_t first_lower = L'а'; // Начало строчных букв
-    const wchar_t first_upper = L'А'; // Начало заглавных букв
-    int i;
-    for (i = 0; i < rand()%((UNIVERSE_SIZE/2)-1)+1; i++) {
-        // Случайный выбор между заглавными и строчными буквами
-        if (rand() % 2) {
-            arr[i] = (wchar_t)(first_upper + rand()%((UNIVERSE_SIZE/2)-1)+1);  // Строчные буквы
-        } else {
-            arr[i] = (wchar_t)(first_lower + rand()%((UNIVERSE_SIZE/2)-1)+1);  // Строчные буквы
-        }
+    bool used[UNIVERSE_SIZE] = {false};  // Массив для отслеживания использованных символов
+    int i = 0;
 
-        if (arr[i]-first_lower == 32) i--;
+    // Проверка, что power не больше размера вселенной возможных символов
+    if (power >= UNIVERSE_SIZE) {
+        power = UNIVERSE_SIZE-1;  // Ограничение на количество символов
     }
-    arr[i] = '\0';
+
+    while (i < power) {
+        wchar_t new_char = (wchar_t)(first_lower + rand() % UNIVERSE_SIZE);
+
+        // Проверяем, был ли символ использован и не равен ли он символу с разницей 32
+        if (!used[new_char - first_lower] && (new_char - first_lower != 32)) {
+            arr[i] = new_char;  // Если не был, добавляем его в массив
+            used[new_char - first_lower] = true;  // Отмечаем как использованный
+            i++;
+        }
+    }
+
+    arr[i] = L'\0'; // Завершаем массив нулевым символом
 }
 
 
 int main() {
 #pragma region formation
-
-    wcout.imbue(locale("ru_RU.UTF-8"));  // Устанавливаем локаль для wcout
-    const size_t len = 100;
+    setlocale(LC_ALL, "");
+    const size_t len = 33;
+    size_t power;
     wchar_t a[len], b[len], c[len], d[len];
+    // получаем мощность множеств
+    wcout << L"Введите мощность множеств:\n";
+    cin >> power;
     // Инициализируем генератор случайных чисел
-    srand(time(nullptr));
-    Randomizer(a);
-    Randomizer(b);
-    Randomizer(c);
-    Randomizer(d);
+    srand(time(nullptr)); // time(nullptr)
+    Randomizer(a, power);
+    Randomizer(b, power);
+    Randomizer(c, power);
+    Randomizer(d, power);
     wcout << "a: " << a << endl;
     wcout << "b: " << b << endl;
     wcout << "c: " << c << endl;
     wcout << "d: " << d << endl;
 
-    const size_t size = wcslen(a) + wcslen(b) + wcslen(c) + 1;
-    wchar_t e_arr[size] , e_list[size], e_uni[size], e_mw[size];
+    //const size_t size = wcslen(a) + wcslen(b) + wcslen(c) + 1;
+    wchar_t e_arr[len] , e_list[len], e_uni[len], e_mw[len];
 
 #pragma endregion formation
 
@@ -270,7 +268,6 @@ int main() {
     Word* list_e = nullptr;
     auto list_t1 = chrono::high_resolution_clock::now( );
 
-    // Вычисляем E = (A ∪ B ∪ D) \ C
     OR(list_a, list_e);
     OR(list_b, list_e);
     OR(list_d, list_e);
@@ -280,7 +277,6 @@ int main() {
 
     auto list_t2 = chrono::high_resolution_clock::now( );
     auto list_time_res = chrono::duration_cast<chrono::duration<double, micro>>(list_t2 - list_t1).count();
-
     // Запись результата
     convert(list_e, e_list);
 #pragma endregion list work
@@ -289,7 +285,6 @@ int main() {
     e_arr[0] = '\0';
     auto arr_t1 = chrono::high_resolution_clock::now( );
 
-    // Вычисляем E = (A ∪ B ∪ D) \ C
     OR(a,e_arr);
     OR(b, e_arr);
     OR(d, e_arr);
@@ -312,17 +307,17 @@ int main() {
     auto uni_t1 = chrono::high_resolution_clock::now( );
 
     // (a ∪ b ∪ d)
-    unionSets(bitA, bitB, bitUnion);
-    unionSets(bitUnion, bitD, bitUnion);
+    OR(bitA, bitB, bitUnion);
+    OR(bitUnion, bitD, bitUnion);
 
     // (a ∪ b ∪ d) \ c
-    differenceSets(bitUnion, bitC, bitResult);
+    DIFF(bitUnion, bitC, bitResult);
 
     auto uni_t2 = chrono::high_resolution_clock::now( );
     auto uni_time_res = chrono::duration_cast<chrono::duration<double, micro>>(uni_t2 - uni_t1).count();
 
 
-    // Запись результата
+    // Вывод результата
     convert(bitResult, e_uni);
 #pragma endregion universe work
 
@@ -344,16 +339,16 @@ int main() {
     auto mw_time_res = chrono::duration_cast<chrono::duration<double, micro>>(mw_t2 - mw_t1).count();
 
 
-    // Запись результата
+    // Вывод результата
     convert(wResult, e_mw);
 #pragma endregion machine word work
 
 #pragma region output results
     // Вывод результата
-    wcout << "array\t\t\t"  << e_arr << L",\tза время:\t" << arr_time_res << L" микросекунд" << endl;
-    wcout << "linked list\t\t" << e_list << L",\tза время:\t" << list_time_res << L" микросекунд" << endl;
-    wcout << "universe\t\t" << e_uni << L",\tза время:\t" << uni_time_res << L" микросекунд" << endl;
-    wcout << "machine word\t" << e_mw << L",\tза время:\t" << mw_time_res << L" микросекунд" << endl;
+    wcout << "array\t\t\t"  << e_arr << L",\tза время:\t" << arr_time_res << L" наносекунд" << endl;
+    wcout << "linked list\t\t" << e_list << L",\tза время:\t" << list_time_res << L" наносекунд" << endl;
+    wcout << "universe\t\t" << e_uni << L",\tза время:\t" << uni_time_res << L" наносекунд" << endl;
+    wcout << "machine word\t\t" << e_mw << L",\tза время:\t" << mw_time_res << L" наносекунд" << endl;
 #pragma endregion output results
 
     return 0;
