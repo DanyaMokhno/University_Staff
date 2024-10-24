@@ -65,7 +65,7 @@ public:
         A = new wchar_t[n];
     }
     Set(const wchar_t* _string): A(new wchar_t[n]){
-        wcpcpy(A, _string);
+        wcscpy(A, _string);
     }
     ~Set(){
         delete [] A;

@@ -34,7 +34,7 @@ void Randomizer(wchar_t *arr, size_t power) {
 }
 
 int main() {
-#ifndef __DARWIN_UNIX03__ // Устанавливаем локаль для macos
+#ifdef __DARWIN_UNIX03 // Устанавливаем локаль для macos
     wcout.imbue(locale("ru_RU.UTF-8"));
 #else // Устанавливаем локаль для windows и linux
     setlocale(LC_ALL, "");
@@ -63,9 +63,9 @@ int main() {
     auto t2 = chrono::high_resolution_clock::now( );
     auto time_res = chrono::duration_cast<chrono::duration<double, micro>>(t2 - t1).count();
 
-    cout << "E = (A ∪ B ∪ D) \\ C = ";
+    wcout << L"E = (A U B U D) \\ C = ";
     E.show();
     // Вывод результата
-    cout << "Время выполнения:\t" << time_res << " микросекунд" << endl;
+    wcout << L"Время выполнения:\t" << time_res << L" микросекунд" << endl;
     return 0;
 }
